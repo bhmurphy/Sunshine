@@ -902,14 +902,13 @@ jobs:
             -B build \
             -G Ninja \
             -S . \
-            -j $(nproc)
             -DBUILD_WERROR=ON \
             -DCMAKE_BUILD_TYPE=RelWithDebInfo \
             -DSUNSHINE_ASSETS_DIR=assets \
             -DSUNSHINE_PUBLISHER_NAME='${{ github.repository_owner }}' \
             -DSUNSHINE_PUBLISHER_WEBSITE='https://app.lizardbyte.dev' \
             -DSUNSHINE_PUBLISHER_ISSUE_URL='https://app.lizardbyte.dev/support'
-          ninja -C build
+          ninja -C -j $(nproc) build
 
       - name: Package Windows
         shell: msys2 {0}
