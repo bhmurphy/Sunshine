@@ -176,7 +176,7 @@ namespace http {
     return 0;
   }
 
-  bool download_file(const std::string &url, const std::string &file, long ssl_version) {
+  bool download_file(const std::string &url, const std::string &file) {
     // sonar complains about weak ssl and tls versions; however sonar cannot detect the fix
     CURL *curl = curl_easy_init();  // NOSONAR
     if (!curl) {
@@ -197,12 +197,12 @@ namespace http {
       return false;
     }
 
-    curl_easy_setopt(curl, CURLOPT_SSLVERSION, ssl_version);  // NOSONAR
+    // curl_easy_setopt(curl, CURLOPT_SSLVERSION, ssl_version);  // NOSONAR
     curl_easy_setopt(curl, CURLOPT_URL, url.c_str());
     curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, fwrite);
     curl_easy_setopt(curl, CURLOPT_WRITEDATA, fp);
     std::string profile = getenv("USERPROFILE");
-    curl_easy_setopt(curl, CURLOPT_STDERR, fopen((profile + "\\test.log").c_str(), "w+"));
+    // curl_easy_setopt(curl, CURLOPT_STDERR, fopen((profile + "\\test.log").c_str(), "w+"));
     curl_easy_setopt(curl, CURLOPT_VERBOSE, 1);
     
     CURLcode result = curl_easy_perform(curl);
