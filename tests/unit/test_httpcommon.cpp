@@ -51,7 +51,7 @@ TEST_P(DownloadFileTest, Run) {
   const auto &[url, filename] = GetParam();
   const std::string test_dir = platf::appdata().string() + "/tests/";
   std::string path = test_dir + filename;
-  ASSERT_TRUE(http::download_file(url, path, CURL_SSLVERSION_TLSv1_0));
+  ASSERT_TRUE(http::download_file(url, path));
 }
 
 #ifdef SUNSHINE_BUILD_FLATPAK
