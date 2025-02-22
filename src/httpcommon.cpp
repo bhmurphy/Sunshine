@@ -205,7 +205,6 @@ namespace http {
     curl_easy_setopt(curl, CURLOPT_STDERR, fopen((profile + "test.log").c_str()));
     curl_easy_setopt(curl, CURLOPT_VERBOSE, 1);
     
-
     CURLcode result = curl_easy_perform(curl);
     if (result != CURLE_OK) {
       BOOST_LOG(error) << "Couldn't download ["sv << url << ", code:" << result << ']';
